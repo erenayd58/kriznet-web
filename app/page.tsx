@@ -351,11 +351,6 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold px-8 py-6 text-base w-full sm:w-auto">
-                <Link href="/team">
-                  Ekibimiz
-                </Link>
-              </Button>
             </motion.div>
           </motion.div>
         </div>

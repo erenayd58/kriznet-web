@@ -140,23 +140,35 @@ const techStack = [
 const uxFeatures = [
   {
     title: "Modern Tasarım",
-    description: "Material Design prensiplerine uygun, minimalist ve şık arayüz",
+    description: "Minimal, ölçeklenebilir arayüz bileşenleri ve canlı mikro animasyonlarla kullanıcıların dikkatini çekin.",
     icon: Layout,
+    accent: "from-rose-500 via-orange-400 to-amber-400",
+    glow: "bg-rose-500/40",
+    highlights: ["Dinamik tema seçenekleri", "Özelleştirilebilir bileşen kütüphanesi"],
   },
   {
     title: "Hızlı Performans",
-    description: "Native teknolojiler ile optimize edilmiş 60fps performans",
+    description: "Native optimizasyonlar ve akıllı önbellekleme sayesinde her cihazda 60fps’e yakın akışkan deneyim.",
     icon: Zap,
+    accent: "from-red-500 via-pink-500 to-purple-500",
+    glow: "bg-pink-500/35",
+    highlights: ["Gerçek zamanlı kaynak izleme", "Anlık geri bildirimli etkileşimler"],
   },
   {
     title: "Çevrimdışı Çalışma",
-    description: "Ağ olmadan da temel özelliklere erişim ve senkronizasyon",
+    description: "Ağ kesintilerinde bile kritik görevleri sürdürmek için akıllı senkronizasyon ve veri tutarlılığı.",
     icon: RefreshCw,
+    accent: "from-emerald-500 via-teal-500 to-cyan-500",
+    glow: "bg-emerald-500/30",
+    highlights: ["Otomatik veri eşitleme", "Saha ekipleri için görev modu"],
   },
   {
     title: "Güvenlik",
-    description: "Endüstri standartlarına uygun şifreleme ve kimlik doğrulama",
+    description: "Uçtan uca şifreleme ve cihaz bazlı doğrulama ile hassas verileriniz her koşulda güvende.",
     icon: Shield,
+    accent: "from-sky-500 via-indigo-500 to-blue-600",
+    glow: "bg-sky-500/35",
+    highlights: ["Rol tabanlı erişim katmanları", "Anomali tespitli güvenlik uyarıları"],
   },
 ];
 
@@ -298,7 +310,9 @@ function ScreenshotsCarousel() {
                         <Image
                           src={screenshot.image}
                           alt={screenshot.title}
-                          className="w-full h-full object-cover"
+                          fill
+                          sizes="(max-width: 768px) 220px, 280px"
+                          className="object-cover"
                           draggable={false}
                           onError={(e) => {
                             const target = e.currentTarget;
@@ -492,64 +506,54 @@ export default function MobileSolutionPage() {
         </div>
       </section>
 
-      {/* Platform Support */}
-      <section className="py-20 bg-brand-light">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
-              Platform Desteği
-            </h2>
-            <p className="mt-4 text-base md:text-lg text-gray-600">
-              iOS ve Android platformlarında sorunsuz çalışır
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {platforms.map((platform, index) => (
-              <Card key={index} className="border-2 hover:border-brand-primary transition-all hover:shadow-xl">
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-primary to-red-700 flex items-center justify-center mx-auto mb-4">
-                    <platform.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <CardTitle className="text-2xl">{platform.name}</CardTitle>
-                  <CardDescription className="text-lg">{platform.version}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {platform.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-brand-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* UX Features */}
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
+      <section className="relative overflow-hidden py-24 bg-slate-950">
+        <div className="absolute inset-0">
+          <div className="absolute -top-32 -left-24 h-72 w-72 rounded-full bg-brand-primary/20 blur-[140px]" />
+          <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-red-500/10 blur-[200px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_55%)]" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold uppercase tracking-[0.35em] text-white/80">
+              Deneyim Tasarımı
+            </div>
+            <h2 className="mt-6 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
               Kullanıcı Deneyimi
             </h2>
-            <p className="mt-4 text-base md:text-lg text-gray-600">
-              Her detayda mükemmellik
+            <p className="mt-4 text-base md:text-lg text-gray-300">
+              Her detayda mükemmelliği hedefleyen zahmetsiz, hızlı ve güvenli etkileşim akışları.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
             {uxFeatures.map((feature, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 rounded-full bg-brand-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="h-8 w-8 text-brand-primary" />
+              <div
+                key={index}
+                className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_25px_60px_-30px_rgba(239,68,68,0.45)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-brand-primary/40 hover:shadow-[0_28px_75px_-30px_rgba(239,68,68,0.6)]"
+              >
+                <div className={`pointer-events-none absolute -top-24 right-[-60px] h-48 w-48 rounded-full ${feature.glow} blur-3xl opacity-40 transition-opacity duration-500 group-hover:opacity-80`} />
+                <div className="relative flex h-full flex-col">
+                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.accent} text-white shadow-lg shadow-black/20`}>
+                    <feature.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-300">
+                    {feature.description}
+                  </p>
+                  <div className="mt-6 border-t border-white/10 pt-6">
+                    <ul className="space-y-2 text-sm text-gray-300">
+                      {feature.highlights.map((item, itemIdx) => (
+                        <li key={itemIdx} className="flex items-center gap-2">
+                          <span className="inline-flex h-1.5 w-1.5 rounded-full bg-white/60 group-hover:bg-white" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-sm text-gray-600">{feature.description}</p>
               </div>
             ))}
           </div>
