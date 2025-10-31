@@ -295,7 +295,7 @@ function ScreenshotsCarousel() {
                             : 'translate-x-full opacity-0'
                         }`}
                       >
-                        <img
+                        <Image
                           src={screenshot.image}
                           alt={screenshot.title}
                           className="w-full h-full object-cover"

@@ -111,7 +111,7 @@ export default function VodafonePartnershipPage() {
               Vodafone ile Geleceği Birlikte İnşa Edelim
             </h1>
             <p className="mt-6 text-lg leading-8 text-white/90">
-              Yenilikçi IoT çözümlerimizle Vodafone'un teknoloji liderliğini
+              Yenilikçi IoT çözümlerimizle Vodafone&apos;un teknoloji liderliğini
               güçlendiriyor, yeni iş modelleri ve gelir kaynakları yaratıyoruz.
             </p>
           </div>
@@ -123,7 +123,7 @@ export default function VodafonePartnershipPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Vodafone'a Sağlayacağımız Değer
+              Vodafone&apos;a Sağlayacağımız Değer
             </h2>
             <p className="mt-4 text-lg text-gray-600">
               Stratejik ortaklığımızın temel faydaları
@@ -332,7 +332,7 @@ export default function VodafonePartnershipPage() {
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li>• Pilot projeler için Vodafone desteği</li>
                   <li>• Marketing ve sales kaynakları</li>
-                  <li>• Global sales network'e erişim</li>
+                  <li>• Global sales network&apos;e erişim</li>
                 </ul>
               </CardContent>
             </Card>

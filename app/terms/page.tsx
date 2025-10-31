@@ -102,7 +102,7 @@ export default function TermsPage() {
                 <li>İletişim başarısızlıklarından kaynaklanan hasarlar</li>
               </ul>
               <p className="mt-4">
-                Uygulama "olduğu gibi" sunulmaktadır ve hiçbir garantisi yoktur.
+                Uygulama &quot;olduğu gibi&quot; sunulmaktadır ve hiçbir garantisi yoktur.
               </p>
             </CardContent>
           </Card>
