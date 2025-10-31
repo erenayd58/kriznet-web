@@ -111,14 +111,8 @@ export default function Home() {
             {/* CTA Buttons */}
             <motion.div 
               variants={fadeInUp}
-              className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+              className="mt-10 flex items-center justify-center"
             >
-              <Button asChild size="lg" className="bg-white text-brand-primary hover:bg-white/90 font-semibold px-8 py-6 text-base group">
-                <Link href="/demo" className="flex items-center gap-2">
-                  Demo İzle
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
               <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base backdrop-blur-sm">
                 <Link href="/contact">
                   İletişime Geçin
