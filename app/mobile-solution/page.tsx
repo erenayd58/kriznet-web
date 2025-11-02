@@ -1,7 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,183 +13,174 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Smartphone,
-  Zap,
-  MapPin,
+  ArrowRight,
   Bell,
-  Shield,
-  Gauge,
-  Cloud,
-  RefreshCw,
-  Users,
-  BarChart3,
-  Layout,
-  Settings,
   CheckCircle2,
-  Globe,
-  Database,
-  Lock,
   ChevronLeft,
   ChevronRight,
+  Gauge,
+  Layers,
+  MapPin,
+  Shield,
+  Signal,
+  Smartphone,
+  Users,
+  Wifi,
+  Zap,
 } from "lucide-react";
 
 const screenshots = [
   {
     id: 1,
     title: "Giriş Ekranı",
-    description: "İnternet yokken bile ulaşılabilir",
+    description: "İnternet yokken bile ulaşılabilir.",
     image: "/screenshots/splash.jpg",
   },
   {
     id: 2,
     title: "İzinler",
-    description: "Bluetooth, Konum ve Bildirim izinleri",
+    description: "Bluetooth, konum ve bildirim izinlerini kolayca yönetin.",
     image: "/screenshots/permissions.jpg",
   },
   {
     id: 3,
     title: "Profil Oluşturma",
-    description: "Acil durum bilgilerinizi kaydedin",
+    description: "Acil durum bilgilerinizi birkaç adımda kaydedin.",
     image: "/screenshots/profile.jpg",
   },
   {
     id: 4,
-    title: "Ana Sayfa",
-    description: "SOS butonu ile acil yardım çağırın",
+    title: "Ana Ekran",
+    description: "SOS butonu ve ağ görünümü tek ekranda.",
     image: "/screenshots/main.jpg",
   },
   {
     id: 5,
     title: "Yakın Ağ",
-    description: "Mesh ağındaki cihazları görüntüleyin",
+    description: "Mesh ağındaki cihazları gerçek zamanlı gözlemleyin.",
     image: "/screenshots/network.jpg",
   },
   {
     id: 6,
     title: "Mesajlaşma",
-    description: "İnternet olmadan mesajlaşın",
+    description: "İnternet olmadan anlık mesajlaşma deneyimi.",
     image: "/screenshots/messages.jpg",
   },
   {
     id: 7,
     title: "Güç Yönetimi",
-    description: "Batarya tasarrufu için güç modları",
+    description: "Farklı senaryolar için akıllı pil modları.",
     image: "/screenshots/settings.jpg",
   },
 ];
 
-const mainFeatures = [
-  {
-    icon: BarChart3,
-    title: "Gerçek Zamanlı Veri",
-    description: "IoT cihazlarından anlık veri görüntüleme ve grafikler",
-    highlights: ["Anlık cihaz verileri", "Geçmiş veri grafikleri", "Anomali tespiti"],
-    color: "bg-red-100 text-brand-primary",
-  },
+const appHighlights = [
   {
     icon: Bell,
-    title: "Anlık Bildirimler",
-    description: "Önemli olaylar için push notification sistemi",
-    highlights: ["Kritik uyarılar", "Özelleştirilebilir", "Multi-channel"],
-    color: "bg-red-100 text-brand-primary",
+    title: "Acil SOS Sistemi",
+    description:
+      "Tek dokunuşla acil durum mesajı gönderin ve sahadaki tüm ekipleri eş zamanlı bilgilendirin.",
+    accent: "from-[#ef4444] via-[#f97316] to-[#fb923c]",
   },
   {
-    icon: Layout,
-    title: "Dashboard Özelleştirme",
-    description: "Kullanıcı ihtiyaçlarına özel dashboard oluşturma",
-    highlights: ["Drag & drop", "Widget'lar", "Tema seçenekleri"],
-    color: "bg-gray-100 text-gray-700",
-  },
-];
-
-const platforms = [
-  {
-    name: "iOS",
-    version: "14.0+",
-    icon: Smartphone,
-    features: ["Native performans", "Face ID desteği", "Widget'lar"],
+    icon: Users,
+    title: "Mesh Ağ Görüntüleyici",
+    description:
+      "Yakınınızdaki cihazları gerçek zamanlı izleyin, ağ sağlığını ve kapsama alanını tek bakışta görün.",
+    accent: "from-[#38bdf8] via-[#0ea5e9] to-[#2563eb]",
   },
   {
-    name: "Android",
-    version: "8.0+",
-    icon: Smartphone,
-    features: ["Material Design", "Background sync", "Bildirim kontrolü"],
-  },
-];
-
-const techStack = [
-  {
-    category: "Frontend",
-    icon: Layout,
-    technologies: ["React Native", "TypeScript", "Redux Toolkit"],
-  },
-  {
-    category: "Backend",
-    icon: Database,
-    technologies: ["REST API", "WebSocket", "Firebase"],
-  },
-  {
-    category: "Harita & Konum",
     icon: MapPin,
-    technologies: ["Google Maps SDK", "Geolocation API", "Geocoding"],
+    title: "Konum Paylaşımı",
+    description:
+      "Saha ekiplerinin konumlarını otomatik paylaşarak görev koordinasyonunu hızlandırın.",
+    accent: "from-[#34d399] via-[#22d3ee] to-[#0ea5e9]",
   },
   {
-    category: "Güvenlik",
-    icon: Lock,
-    technologies: ["OAuth 2.0", "JWT", "Biometric Auth"],
-  },
-];
-
-const uxFeatures = [
-  {
-    title: "Modern Tasarım",
-    description: "Minimal, ölçeklenebilir arayüz bileşenleri ve canlı mikro animasyonlarla kullanıcıların dikkatini çekin.",
-    icon: Layout,
-    accent: "from-rose-500 via-orange-400 to-amber-400",
-    glow: "bg-rose-500/40",
-    highlights: ["Dinamik tema seçenekleri", "Özelleştirilebilir bileşen kütüphanesi"],
-  },
-  {
-    title: "Hızlı Performans",
-    description: "Native optimizasyonlar ve akıllı önbellekleme sayesinde her cihazda 60fps’e yakın akışkan deneyim.",
-    icon: Zap,
-    accent: "from-red-500 via-pink-500 to-purple-500",
-    glow: "bg-pink-500/35",
-    highlights: ["Gerçek zamanlı kaynak izleme", "Anlık geri bildirimli etkileşimler"],
-  },
-  {
-    title: "Çevrimdışı Çalışma",
-    description: "Ağ kesintilerinde bile kritik görevleri sürdürmek için akıllı senkronizasyon ve veri tutarlılığı.",
-    icon: RefreshCw,
-    accent: "from-emerald-500 via-teal-500 to-cyan-500",
-    glow: "bg-emerald-500/30",
-    highlights: ["Otomatik veri eşitleme", "Saha ekipleri için görev modu"],
-  },
-  {
-    title: "Güvenlik",
-    description: "Uçtan uca şifreleme ve cihaz bazlı doğrulama ile hassas verileriniz her koşulda güvende.",
     icon: Shield,
-    accent: "from-sky-500 via-indigo-500 to-blue-600",
-    glow: "bg-sky-500/35",
-    highlights: ["Rol tabanlı erişim katmanları", "Anomali tespitli güvenlik uyarıları"],
+    title: "Offline Çalışma",
+    description:
+      "İnternet olmadan da kritik özelliklere erişim ve akıllı senkronizasyon.",
+    accent: "from-[#818cf8] via-[#6366f1] to-[#4338ca]",
+  },
+  {
+    icon: Zap,
+    title: "Hızlı Mesajlaşma",
+    description:
+      "BLE Mesh üzerinden anlık mesaj gönderme ve acil durum bildirimlerini saniyeler içinde iletme.",
+    accent: "from-[#f97316] via-[#fb7185] to-[#f43f5e]",
+  },
+  {
+    icon: Gauge,
+    title: "Pil Optimizasyonu",
+    description:
+      "Akıllı güç yönetimi profilleri ile uzun saha görevlerinde bile kesintisiz kullanım.",
+    accent: "from-[#2dd4bf] via-[#22c55e] to-[#84cc16]",
   },
 ];
 
-
-const integrations = [
-  "RESTful API Gateway",
-  "OAuth 2.0 Kimlik Doğrulama",
-  "IoT Platform Entegrasyonu",
-  "Cloud Services",
-  "Real-time Analytics",
-  "Firebase Cloud Messaging",
+const coreModules = [
+  {
+    title: "Saha Ekipleri",
+    icon: Smartphone,
+    description:
+      "Görev tabanlı modüller, hızlı bildirimler ve offline kayıtlarla saha ekiplerinin ihtiyaçlarına odaklı tasarım.",
+    bullets: [
+      "Görev, konum ve ekip takibi tek panelde",
+      "Önceliklendirilmiş uyarılar ve olay akışı",
+      "Form ve veri toplama araçları",
+    ],
+  },
+  {
+    title: "Komuta Merkezi",
+    icon: Signal,
+    description:
+      "Geniş kapsamlı dashboard, risk haritaları ve kriz planlarına yönelik raporlama araçları.",
+    bullets: [
+      "Gerçek zamanlı ağ sağlığı ve kapasite",
+      "Dinamik görev atama ve onay akışları",
+      "Kurumsal sistemlerle çift yönlü entegrasyon",
+    ],
+  },
+  {
+    title: "Analitik & Raporlama",
+    icon: Layers,
+    description:
+      "Edge ön işleme ve bulut analitikleri ile karar destek mekanizmalarını hızlandırın.",
+    bullets: [
+      "Saha yoğunluk ve risk haritaları",
+      "KPI bazlı performans raporları",
+      "Öngörücü modellemeler ve uyarılar",
+    ],
+  },
 ];
 
-const futureFeatures = [
-  { name: "Yapay Zeka Tahminleme", status: "Geliştiriliyor", icon: BarChart3 },
-  { name: "AR ile Görselleştirme", status: "Planlanan", icon: Gauge },
-  { name: "Sesli Asistan", status: "Planlanan", icon: Bell },
-  { name: "Çoklu Dil Desteği", status: "Planlanan", icon: Globe },
+const connectivityLayers = [
+  {
+    title: "Bağlantı Katmanı",
+    icon: Wifi,
+    description:
+      "BLE Mesh + LoRa hibrit yapısı ile ulaşılması zor noktalarda bile bağlantı sürdürülebilir.",
+  },
+  {
+    title: "Güvenlik Katmanı",
+    icon: Shield,
+    description:
+      "Uçtan uca şifreleme, cihaz sertifikasyonu ve rol tabanlı erişim politikaları standarttır.",
+  },
+  {
+    title: "Süreç Otomasyonu",
+    icon: Zap,
+    description:
+      "Akıllı tetikleyiciler, otomatik olay akışları ve kurum içi entegrasyonlar ile operasyon hızlanır.",
+  },
+];
+
+const roadmap = [
+  { name: "Yapay zekâ destekli risk tahmini", status: "Geliştiriliyor" },
+  { name: "AR destekli saha navigasyonu", status: "Planlanan" },
+  { name: "Sesli komut desteği", status: "Planlanan" },
+  { name: "Çoklu kurum çalışma alanı", status: "Pilot aşamasında" },
 ];
 
 function ScreenshotsCarousel() {
@@ -194,238 +188,125 @@ function ScreenshotsCarousel() {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % screenshots.length);
-  };
+  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % screenshots.length);
+  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + screenshots.length) % screenshots.length);
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + screenshots.length) % screenshots.length);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
+  const handleTouchStart = (e: React.TouchEvent) => setTouchStart(e.targetTouches[0].clientX);
+  const handleTouchMove = (e: React.TouchEvent) => setTouchEnd(e.targetTouches[0].clientX);
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
     const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) {
-      nextSlide();
-    }
-    if (isRightSwipe) {
-      prevSlide();
-    }
-
+    if (distance > 50) nextSlide();
+    if (distance < -50) prevSlide();
     setTouchStart(0);
     setTouchEnd(0);
   };
 
-  const appHighlights = [
-    {
-      icon: Bell,
-      title: "Acil SOS Sistemi",
-      description: "Tek tuşla acil durum mesajı gönderin",
-      color: "from-red-500 to-red-600"
-    },
-    {
-      icon: Users,
-      title: "Mesh Ağ Görüntüleyici",
-      description: "Yakınınızdaki cihazları gerçek zamanlı izleyin",
-      color: "from-blue-500 to-blue-600"
-    },
-    {
-      icon: MapPin,
-      title: "Konum Paylaşımı",
-      description: "Konumunuzu otomatik paylaşın",
-      color: "from-green-500 to-green-600"
-    },
-    {
-      icon: Shield,
-      title: "Offline Çalışma",
-      description: "İnternet olmadan tüm kritik özelliklere erişim",
-      color: "from-purple-500 to-purple-600"
-    },
-    {
-      icon: Zap,
-      title: "Hızlı Mesajlaşma",
-      description: "BLE Mesh üzerinden anlık mesaj gönderme",
-      color: "from-orange-500 to-orange-600"
-    },
-    {
-      icon: Gauge,
-      title: "Pil Optimizasyonu",
-      description: "Akıllı güç yönetimi ile uzun pil ömrü",
-      color: "from-teal-500 to-teal-600"
-    }
-  ];
-
   return (
-    <section id="uygulama-gorunum" className="py-8 md:py-12 bg-gradient-to-b from-gray-50 to-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center mb-8 md:mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
-            Uygulama İçi Görünüm
-          </h2>
-          <p className="mt-2 text-base md:text-lg text-gray-600">
-            KrizNet mobil uygulamasının modern ve kullanıcı dostu arayüzü
-          </p>
-        </div>
-
-        {/* Two Column Layout: Phone + Features */}
-        <div className="grid xl:grid-cols-[300px_1fr] gap-8 md:gap-10 xl:gap-12 items-start max-w-6xl mx-auto">
-          
-          {/* Left Side: Phone Mockup */}
-          <div className="order-2 xl:order-1">
-            <div className="relative w-[280px] mx-auto xl:mx-0">
-              {/* Phone Mockup */}
-              <div className="relative">
-                <div 
-                  className="relative bg-black rounded-2xl shadow-2xl overflow-hidden border-4 border-gray-800 mx-auto touch-pan-y"
-                  style={{ aspectRatio: '9/19.5', maxWidth: '280px' }}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                >
-                  {/* Screenshots */}
-                  <div className="relative w-full h-full overflow-hidden">
-                    {screenshots.map((screenshot, index) => (
-                      <div
-                        key={screenshot.id}
-                        className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                          index === currentIndex
-                            ? 'translate-x-0 opacity-100'
-                            : index < currentIndex
-                            ? '-translate-x-full opacity-0'
-                            : 'translate-x-full opacity-0'
-                        }`}
-                      >
-                        <Image
-                          src={screenshot.image}
-                          alt={screenshot.title}
-                          fill
-                          sizes="(max-width: 768px) 220px, 280px"
-                          className="object-cover"
-                          draggable={false}
-                          onError={(e) => {
-                            const target = e.currentTarget;
-                            target.style.display = 'none';
-                            const parent = target.parentElement;
-                            if (parent) {
-                              const fallback = document.createElement('div');
-                              fallback.className = 'absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-brand-primary to-red-700 text-white p-8 text-center';
-                              fallback.innerHTML = `
-                                <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
-                                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                  </svg>
-                                </div>
-                                <h3 class="text-xl font-bold mb-2">${screenshot.title}</h3>
-                                <p class="text-sm opacity-90">${screenshot.description}</p>
-                              `;
-                              parent.appendChild(fallback);
-                            }
-                          }}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Navigation Buttons */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-14 bg-gradient-to-br from-brand-primary to-red-600 hover:from-red-600 hover:to-brand-primary text-white rounded-full p-3 shadow-lg transition-all hover:scale-110 border-2 border-white"
-                  aria-label="Önceki ekran"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-14 bg-gradient-to-br from-brand-primary to-red-600 hover:from-red-600 hover:to-brand-primary text-white rounded-full p-3 shadow-lg transition-all hover:scale-110 border-2 border-white"
-                  aria-label="Sonraki ekran"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Screenshot Info */}
-              <div className="mt-4 text-center px-2">
-                <h3 className="text-base font-bold text-gray-900 mb-1 line-clamp-1">
-                  {screenshots[currentIndex].title}
-                </h3>
-                <p className="text-sm text-gray-600 line-clamp-1">
-                  {screenshots[currentIndex].description}
-                </p>
-              </div>
-
-              {/* Dots Indicator */}
-              <div className="flex justify-center gap-1.5 mt-3">
-                {screenshots.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`h-1.5 rounded-full transition-all ${
+    <section className="relative overflow-hidden py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.06),_transparent_60%)]" />
+      <div className="absolute -top-36 right-[-120px] h-72 w-72 rounded-full bg-brand-primary/25 blur-[140px]" />
+      <div className="absolute bottom-0 left-[-120px] h-64 w-64 rounded-full bg-rose-500/15 blur-[120px]" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-between">
+          <div className="order-2 xl:order-1 w-full max-w-md mx-auto xl:mx-0">
+            <div
+              className="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-slate-900 via-slate-950 to-black shadow-[0_28px_70px_-30px_rgba(15,23,42,0.8)]"
+              style={{ aspectRatio: "9/19.5" }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div className="relative h-full w-full overflow-hidden">
+                {screenshots.map((screenshot, index) => (
+                  <div
+                    key={screenshot.id}
+                    className={`absolute inset-0 transition-all duration-500 ease-in-out ${
                       index === currentIndex
-                        ? 'bg-brand-primary w-6'
-                        : 'bg-gray-300 hover:bg-gray-400 w-1.5'
+                        ? "translate-x-0 opacity-100"
+                        : index < currentIndex
+                        ? "-translate-x-full opacity-0"
+                        : "translate-x-full opacity-0"
                     }`}
-                    aria-label={`${index + 1}. ekrana git`}
-                  />
+                  >
+                    <Image
+                      src={screenshot.image}
+                      alt={screenshot.title}
+                      fill
+                      sizes="(max-width: 768px) 240px, 320px"
+                      className="object-cover"
+                      draggable={false}
+                    />
+                  </div>
                 ))}
               </div>
 
-              {/* Swipe Hint */}
-              <div className="xl:hidden text-center mt-3">
-                <p className="text-sm text-gray-500">
-                  👈 Kaydırarak gezinin 👉
-                </p>
-              </div>
+              <button
+                onClick={prevSlide}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-14 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg transition hover:-translate-x-[3.6rem] hover:bg-white/20"
+                aria-label="Önceki ekran"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-14 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg transition hover:translate-x-[3.6rem] hover:bg-white/20"
+                aria-label="Sonraki ekran"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="mt-4 text-center text-sm text-gray-200">
+              <h3 className="font-semibold text-white">{screenshots[currentIndex].title}</h3>
+              <p className="mt-1 text-gray-400">{screenshots[currentIndex].description}</p>
+            </div>
+
+            <div className="mt-4 flex justify-center gap-1.5">
+              {screenshots.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`h-2 w-10 rounded-full transition-colors ${
+                    index === currentIndex ? "bg-brand-primary" : "bg-white/20 hover:bg-white/40"
+                  }`}
+                  aria-label={`Ekran ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
 
-          {/* Right Side: Features List */}
-          <div className="order-1 xl:order-2 space-y-4 xl:max-w-2xl">
-            <div className="mb-4">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-                Temel Özellikler
-              </h3>
-              <p className="text-base text-gray-600">
-                Afet anında hayat kurtaran modern teknoloji
+          <div className="order-1 xl:order-2 max-w-2xl space-y-8">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.35em] text-gray-300">
+                Mobil arayüz
+              </span>
+              <h2 className="mt-4 text-3xl md:text-4xl font-bold text-white">
+                Saha ekiplerine güç veren deneyim
+              </h2>
+              <p className="mt-3 text-base text-gray-300">
+                KrizNet mobil uygulaması, acil durum modlarına göre uyarlanabilir tasarımı ve yüksek performanslı mesh iletişim katmanı ile fark yaratır.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 xl:grid-cols-1 gap-3">
+            <div className="grid gap-4 sm:grid-cols-2">
               {appHighlights.map((highlight, index) => (
-                <div 
+                <div
                   key={index}
-                  className="group bg-white rounded-lg p-3.5 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100 hover:border-brand-primary/30"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur transition hover:border-brand-primary/50 hover:bg-white/[0.1]"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className={`flex-shrink-0 w-11 h-11 rounded-lg bg-gradient-to-br ${highlight.color} flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform`}>
-                      <highlight.icon className="w-6 h-6 text-white" />
+                  <div className={`pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${highlight.accent}`} />
+                  <div className="relative flex flex-col gap-2">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white">
+                      <highlight.icon className="h-5 w-5" />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-base font-semibold text-gray-900 leading-tight mb-1 group-hover:text-brand-primary transition-colors line-clamp-1">
-                        {highlight.title}
-                      </h4>
-                      <p className="text-sm text-gray-600 leading-snug line-clamp-1">
-                        {highlight.description}
-                      </p>
-                    </div>
+                    <h3 className="text-base font-semibold text-white">{highlight.title}</h3>
+                    <p className="text-sm text-gray-200 leading-snug">{highlight.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -435,70 +316,88 @@ function ScreenshotsCarousel() {
 export default function MobileSolutionPage() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-12 sm:py-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-primary via-red-600 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-white/20 via-30% via-white/60 via-60% to-white pointer-events-none" />
-        <div className="absolute inset-0 bg-grid-white/10 bg-[size:20px_20px]" />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 backdrop-blur-sm">
-              <Smartphone className="h-5 w-5 text-white" />
-              <span className="text-sm font-semibold text-white">
-                Mobil Çözüm
-              </span>
-            </div>
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              KrizNet Mobil Uygulaması
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-white/90">
-              Modern ve kullanıcı dostu mobil uygulamamız, afet anında bile kesintisiz
-              iletişim için tasarlandı. Mesh tabanlı altyapı sayesinde ağlar koptuğunda
-              ekipleriniz bağlantıda kalır.
-            </p>
-          </div>
+      <section className="relative overflow-hidden py-28">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]" />
+        <div className="absolute -top-48 -right-32 h-96 w-96 rounded-full bg-brand-primary/25 blur-[160px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.01)_45%,transparent_100%)]" />
+        <div className="relative mx-auto max-w-5xl px-6 text-center space-y-10">
+          <motion.span
+            className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold uppercase tracking-[0.35em] text-gray-100"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            Mobil Çözüm
+          </motion.span>
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Kesintisiz iletişim için cebinizdeki kriz asistanı
+          </motion.h1>
+          <motion.p
+            className="mx-auto max-w-3xl text-lg text-gray-300"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            KrizNet mobil uygulaması, sahadaki ekiplerin en kritik anlarda bile bilgiye erişimini, koordinasyonunu ve güvenliğini garanti altına alır.
+          </motion.p>
+          <motion.div
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <Button asChild size="lg" className="bg-brand-primary px-8 py-6 text-base font-semibold text-white hover:bg-brand-primary/90">
+              <Link href="/demo" className="flex items-center gap-2">
+                Uygulamayı deneyin
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white/40 px-8 py-6 text-base font-semibold text-white hover:bg-white/10">
+              <Link href="/contact">Uzmanla görüş</Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
 
-      {/* App Screenshots Carousel */}
       <ScreenshotsCarousel />
 
-      {/* Main Features */}
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
-              Uygulama Özellikleri
-            </h2>
-            <p className="mt-4 text-base md:text-lg text-gray-600">
-              Kullanıcı ihtiyaçlarına özel geliştirilmiş özellikler
+      <section className="relative overflow-hidden py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.05),_transparent_65%)]" />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.35em] text-gray-300">
+              Modüller
+            </span>
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-white">Operasyonların kalbi</h2>
+            <p className="mt-3 text-base text-gray-300">
+              Sahadaki ekiplerden komuta merkezine kadar tüm katmanları tek mobil çözümde birleştirin.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {mainFeatures.map((feature, index) => (
-              <Card
-                key={index}
-                className="border-2 hover:border-brand-primary transition-all hover:shadow-xl group"
-              >
-                <CardHeader>
-                  <div
-                    className={`w-12 h-12 rounded-lg ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
-                  >
-                    <feature.icon className="h-6 w-6" />
+          <div className="mt-14 grid gap-8 lg:grid-cols-3">
+            {coreModules.map((module, index) => (
+              <Card key={index} className="h-full border-white/10 bg-white/[0.05] backdrop-blur">
+                <CardHeader className="space-y-4">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-white">
+                    <module.icon className="h-6 w-6" />
                   </div>
-                  <CardTitle className="text-lg">{feature.title}</CardTitle>
-                  <CardDescription>{feature.description}</CardDescription>
+                  <CardTitle className="text-white text-xl">{module.title}</CardTitle>
+                  <CardDescription className="text-sm text-gray-200">
+                    {module.description}
+                  </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {feature.highlights.map((highlight, idx) => (
-                      <li key={idx} className="text-sm text-gray-600 flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-brand-primary flex-shrink-0" />
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
+                <CardContent className="space-y-3">
+                  {module.bullets.map((bullet, bulletIdx) => (
+                    <div key={bulletIdx} className="flex items-start gap-2 text-sm text-gray-200">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-brand-primary" />
+                      <span>{bullet}</span>
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
             ))}
@@ -506,201 +405,99 @@ export default function MobileSolutionPage() {
         </div>
       </section>
 
-      {/* UX Features */}
-      <section className="relative overflow-hidden py-24 bg-slate-950">
-        <div className="absolute inset-0">
-          <div className="absolute -top-32 -left-24 h-72 w-72 rounded-full bg-brand-primary/20 blur-[140px]" />
-          <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-red-500/10 blur-[200px]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_55%)]" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold uppercase tracking-[0.35em] text-white/80">
-              Deneyim Tasarımı
+      <section className="relative overflow-hidden py-24">
+        <div className="absolute inset-0 bg-slate-950/60" />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-start">
+            <div className="space-y-6">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.35em] text-gray-300">
+                Entegrasyon
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Kurumsal yapıya uyumlu bağlantı katmanı
+              </h2>
+              <p className="text-base text-gray-300">
+                Mobil çözüm; telekom altyapıları, acil çağrı merkezleri ve üçüncü parti sistemlerle uçtan uca entegre çalışır.
+              </p>
+              <div className="grid gap-4">
+                {connectivityLayers.map((layer, index) => (
+                  <div key={index} className="rounded-3xl border border-white/10 bg-white/[0.05] px-6 py-5 transition hover:border-brand-primary/50 hover:bg-white/[0.1]">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white">
+                        <layer.icon className="h-5 w-5" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-white">{layer.title}</h3>
+                    </div>
+                    <p className="mt-3 text-sm text-gray-200">{layer.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <h2 className="mt-6 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-              Kullanıcı Deneyimi
-            </h2>
-            <p className="mt-4 text-base md:text-lg text-gray-300">
-              Her detayda mükemmelliği hedefleyen zahmetsiz, hızlı ve güvenli etkileşim akışları.
+
+            <Card className="border-white/10 bg-white/[0.05] backdrop-blur">
+              <CardHeader>
+                <CardTitle className="text-white text-2xl">Kurum içi süreç otomasyonu</CardTitle>
+                <CardDescription className="text-gray-200">
+                  KrizNet mobil çözümü, kurumların mevcut iş akışlarıyla otomatik entegre olur ve manuel süreçleri minimuma indirir.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {["Görev yönetimi ve onay zinciri", "Dinamik şablonlarla form toplama", "Anlık bildirim botları ve raporlar"].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3 text-sm text-gray-200">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-brand-primary" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(239,68,68,0.25),_transparent_60%)]" />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.35em] text-gray-300">
+              Yol Haritası
+            </span>
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-white">Yakında gelecek geliştirmeler</h2>
+            <p className="mt-3 text-base text-gray-300">
+              Sürekli iyileştirme prensibiyle geliştirdiğimiz modüller ve planlanan özellikler.
             </p>
           </div>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-            {uxFeatures.map((feature, index) => (
-              <div
-                key={index}
-                className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_25px_60px_-30px_rgba(239,68,68,0.45)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-brand-primary/40 hover:shadow-[0_28px_75px_-30px_rgba(239,68,68,0.6)]"
-              >
-                <div className={`pointer-events-none absolute -top-24 right-[-60px] h-48 w-48 rounded-full ${feature.glow} blur-3xl opacity-40 transition-opacity duration-500 group-hover:opacity-80`} />
-                <div className="relative flex h-full flex-col">
-                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.accent} text-white shadow-lg shadow-black/20`}>
-                    <feature.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-300">
-                    {feature.description}
-                  </p>
-                  <div className="mt-6 border-t border-white/10 pt-6">
-                    <ul className="space-y-2 text-sm text-gray-300">
-                      {feature.highlights.map((item, itemIdx) => (
-                        <li key={itemIdx} className="flex items-center gap-2">
-                          <span className="inline-flex h-1.5 w-1.5 rounded-full bg-white/60 group-hover:bg-white" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+          <div className="mt-14 grid gap-4 md:grid-cols-2">
+            {roadmap.map((item, index) => (
+              <div key={index} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.05] px-6 py-4 text-sm text-gray-200">
+                <span>{item.name}</span>
+                <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white">
+                  {item.status}
+                </span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Tech Stack */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              Teknoloji Yığını
-            </h2>
-            <p className="mt-4 text-base md:text-lg text-gray-300">
-              Modern ve güvenilir teknolojilerle geliştirildi
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {techStack.map((tech, index) => (
-              <Card key={index} className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all">
-                <CardHeader>
-                  <tech.icon className="h-8 w-8 text-brand-primary mb-3" />
-                  <CardTitle className="text-white">{tech.category}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {tech.technologies.map((item, idx) => (
-                      <li key={idx} className="text-sm text-gray-300 flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-brand-primary flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-16 bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-            <h3 className="text-2xl font-bold mb-6">Sistem Entegrasyonları</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {integrations.map((integration, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-brand-primary flex-shrink-0" />
-                  <span className="text-gray-300">{integration}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Future Features */}
-      <section className="py-16 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
-              Gelecek Özellikler
-            </h2>
-            <p className="mt-4 text-base md:text-lg text-gray-600">
-              Sürekli gelişen ve yenilenen uygulamamız
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {futureFeatures.map((feature, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-all">
-                <CardHeader>
-                  <feature.icon className="h-10 w-10 text-brand-primary mx-auto mb-3" />
-                  <CardTitle className="text-lg">{feature.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <span className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-semibold">
-                    {feature.status}
-                  </span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative py-20 md:py-24 overflow-hidden">
-        {/* Soft gradient background with opacity fade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 via-brand-primary/5 to-brand-primary/30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-primary/60" />
-        
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-primary/20 to-transparent" />
-        
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Heading */}
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-5 tracking-tight">
-              Mobil Uygulamamızı Keşfedin
-            </h2>
-            
-            {/* Description */}
-            <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Kullanıcı dostu arayüzü ve güçlü özellikleri ile her an her yerde
-              <br className="hidden md:block" />
-              IoT cihazlarınızı yönetin.
-            </p>
-            
-            {/* Coming Soon Badge */}
-            <div className="mb-10">
-              <span className="inline-flex items-center gap-2 bg-white border border-gray-200 text-brand-primary px-5 py-2 rounded-full text-sm font-semibold shadow-sm hover:shadow-md transition-shadow">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"></span>
-                </span>
-                Yakında
-              </span>
-            </div>
-            
-            {/* App Store Badges */}
-            <div className="flex flex-wrap justify-center items-center gap-5 md:gap-8">
-              {/* App Store (full badge) */}
-              <a href="#" aria-label="App Store" className="group inline-flex">
-                <Image
-                  src="/app-store-logos/pp-store-icon.png"
-                  alt="Download on the App Store"
-                  width={240}
-                  height={70}
-                  sizes="(max-width: 640px) 200px, (max-width: 1024px) 220px, 240px"
-                  priority
-                  quality={90}
-                  className="h-auto w-[200px] sm:w-[220px] md:w-[240px] transition-transform duration-300 group-hover:scale-[1.05]"
-                />
-              </a>
-
-              {/* Google Play (full badge) */}
-              <a href="#" aria-label="Google Play" className="group inline-flex">
-                <Image
-                  src="/app-store-logos/google-play-icon.png"
-                  alt="Get it on Google Play"
-                  width={240}
-                  height={70}
-                  sizes="(max-width: 640px) 200px, (max-width: 1024px) 220px, 240px"
-                  priority
-                  quality={90}
-                  className="h-auto w-[200px] sm:w-[220px] md:w-[240px] transition-transform duration-300 group-hover:scale-[1.05]"
-                />
-              </a>
-            </div>
+      <section className="relative overflow-hidden py-24">
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/20 via-transparent to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent" />
+        <div className="relative mx-auto max-w-4xl px-6 text-center space-y-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Mobil çözümü canlı görmek ister misiniz?</h2>
+          <p className="text-base md:text-lg text-gray-200">
+            Saha senaryolarınıza özel demo hazırlayarak KrizNet mobil uygulamasının tüm yeteneklerini birlikte keşfedelim.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button asChild size="lg" className="bg-white text-brand-primary hover:bg-white/90 px-8 py-6 text-base font-semibold">
+              <Link href="/contact" className="flex items-center gap-2">
+                Demo planla
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white/50 px-8 py-6 text-base font-semibold text-white hover:bg-white/10">
+              <Link href="/team">Ekibi tanıyın</Link>
+            </Button>
           </div>
         </div>
       </section>

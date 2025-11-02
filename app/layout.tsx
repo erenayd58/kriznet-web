@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { Analytics } from "@vercel/analytics/react";
+// (İsteğe bağlı olarak Core Web Vitals ölçümü için aşağıdaki satırı da aktif edebilirsin)
+// import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,8 +50,13 @@ export default function RootLayout({
           </main>
           <Footer />
         </div>
+
+        {/* Vercel Analytics */}
+        <Analytics />
+
+        {/* (İsteğe bağlı) Core Web Vitals ölçümü */}
+        {/* <SpeedInsights /> */}
       </body>
     </html>
   );
 }
-
