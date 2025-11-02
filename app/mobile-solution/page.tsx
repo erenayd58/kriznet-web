@@ -463,6 +463,48 @@ export default function MobileSolutionPage() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_70%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+        <div className="relative mx-auto max-w-4xl px-6 text-center space-y-8">
+          <div className="space-y-4">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-6 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.45em] text-white/80">
+              Yakında
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              KrizNet mobil uygulaması mağaza lansmanına hazırlanıyor
+            </h2>
+            <p className="mx-auto max-w-2xl text-sm md:text-base text-white/75">
+              Yayın sürecini tamamladıktan sonra Google Play ve App Store üzerinden uygulamayı indirip saha iletişimini en üst seviyeye taşıyabileceksiniz.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="group mx-auto flex w-full max-w-[260px] items-center justify-center">
+              <Image
+                src="/app-store-logos/google-play-icon.png"
+                alt="Google Play"
+                width={320}
+                height={96}
+                className="h-auto w-full select-none transition-transform duration-500 group-hover:-rotate-2 group-hover:scale-[1.05]"
+                draggable={false}
+              />
+            </div>
+
+            <div className="group mx-auto flex w-full max-w-[260px] items-center justify-center">
+              <Image
+                src="/app-store-logos/pp-store-icon.png"
+                alt="App Store"
+                width={320}
+                height={96}
+                className="h-auto w-full select-none transition-transform duration-500 group-hover:rotate-2 group-hover:scale-[1.05]"
+                draggable={false}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
