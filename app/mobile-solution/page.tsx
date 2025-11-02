@@ -207,46 +207,49 @@ function ScreenshotsCarousel() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-between">
           <div className="order-2 xl:order-1 w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] mx-auto xl:mx-0">
-            <div
-              className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-slate-900 via-slate-950 to-black shadow-[0_28px_70px_-30px_rgba(15,23,42,0.8)]"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              <div className="relative h-full w-full overflow-hidden">
-                {screenshots.map((screenshot, index) => (
-                  <div
-                    key={screenshot.id}
-                    className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                      index === currentIndex
-                        ? "translate-x-0 opacity-100"
-                        : index < currentIndex
-                        ? "-translate-x-full opacity-0"
-                        : "translate-x-full opacity-0"
-                    }`}
-                  >
-                    <Image
-                      src={screenshot.image}
-                      alt={screenshot.title}
-                      fill
-                      sizes="(max-width: 640px) 200px, 260px"
-                      className="object-cover"
-                      draggable={false}
-                    />
-                  </div>
-                ))}
-              </div>
-
+            <div className="relative flex items-center justify-center">
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg transition hover:-translate-x-14 hover:bg-white/20"
+                className="absolute -left-12 top-1/2 -translate-y-1/2 rounded-full border border-white/25 bg-white/15 p-2.5 text-white shadow-lg backdrop-blur transition hover:-translate-x-1 hover:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/60"
                 aria-label="Önceki ekran"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
+
+              <div
+                className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-slate-900 via-slate-950 to-black shadow-[0_28px_70px_-30px_rgba(15,23,42,0.8)]"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div className="relative h-full w-full overflow-hidden">
+                  {screenshots.map((screenshot, index) => (
+                    <div
+                      key={screenshot.id}
+                      className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                        index === currentIndex
+                          ? "translate-x-0 opacity-100"
+                          : index < currentIndex
+                          ? "-translate-x-full opacity-0"
+                          : "translate-x-full opacity-0"
+                      }`}
+                    >
+                      <Image
+                        src={screenshot.image}
+                        alt={screenshot.title}
+                        fill
+                        sizes="(max-width: 640px) 200px, 260px"
+                        className="object-cover"
+                        draggable={false}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg transition hover:translate-x-14 hover:bg-white/20"
+                className="absolute -right-12 top-1/2 -translate-y-1/2 rounded-full border border-white/25 bg-white/15 p-2.5 text-white shadow-lg backdrop-blur transition hover:translate-x-1 hover:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/60"
                 aria-label="Sonraki ekran"
               >
                 <ChevronRight className="h-5 w-5" />
