@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Shield, Lock, Eye, FileText, Mail } from "lucide-react";
+import { Shield, Lock, Eye, FileText, Mail, Phone, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Gizlilik Politikası - KrizNet",
@@ -112,23 +112,53 @@ export default function PrivacyPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700">
+          <Card className="bg-gray-800/60 border border-white/10 backdrop-blur">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Mail className="h-5 w-5 text-brand-primary" />
                 İletişim
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-gray-300 space-y-4">
+            <CardContent className="space-y-5 text-gray-200">
               <p>
-                Gizlilik politikamızla ilgili sorularınız için bizimle iletişime geçebilirsiniz:
+                Gizlilik politikamızla ilgili her türlü soru veya talebiniz için bizimle iletişime geçmekten çekinmeyin.
               </p>
-              <p className="mt-4">
-                <strong className="text-white">E-posta:</strong> privacy@kriznet.com
-              </p>
-              <p>
-                <strong className="text-white">Adres:</strong> KrizNet Proje Ekibi
-              </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">
+                  <div className="mb-2 flex items-center gap-2 text-white">
+                    <Mail className="h-4 w-4 text-brand-primary" />
+                    <span className="font-semibold uppercase tracking-wide text-xs">
+                      E-Posta
+                    </span>
+                  </div>
+                  <div className="space-y-1">
+                    <p>1tariktek@gmail.com</p>
+                    <p>erenayd58@gmail.com</p>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">
+                  <div className="mb-2 flex items-center gap-2 text-white">
+                    <Phone className="h-4 w-4 text-brand-primary" />
+                    <span className="font-semibold uppercase tracking-wide text-xs">
+                      Telefon
+                    </span>
+                  </div>
+                  <p>+90 506 121 77 71</p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 sm:col-span-2 text-sm text-white/85">
+                  <div className="mb-2 flex items-center gap-2 text-white">
+                    <MapPin className="h-4 w-4 text-brand-primary" />
+                    <span className="font-semibold uppercase tracking-wide text-xs">
+                      Adres
+                    </span>
+                  </div>
+                  <div className="space-y-1">
+                    <p>Yıldız Teknik Üniversitesi</p>
+                    <p>Davutpaşa Kampüsü</p>
+                    <p>İstanbul, Türkiye</p>
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>

@@ -1,6 +1,5 @@
 ﻿"use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -10,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  ArrowRight,
   Battery,
   CheckCircle2,
   Cloud,
@@ -165,7 +163,7 @@ export default function IoTSolutionClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Mesh tabanlı sahra iletişimi için akıllı cihaz ekosistemi
+            KrizNet IoT platformu sahadaki sensörleri tek ağda buluşturur
           </motion.h1>
           <motion.p
             className="mx-auto max-w-3xl text-lg text-gray-300"
@@ -173,28 +171,8 @@ export default function IoTSolutionClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Dayanıklı donanım modülleri, düşük enerji tüketimi ve kurumsal güvenlik standartlarıyla kriz anlarında kesintisiz bağlantı sağlayın.
+            Modüler cihazlarımız, mesh ağ geçitleriyle birlikte çalışarak saha ekiplerine ve komuta merkezlerine güvenilir, anlık veri akışı sunar.
           </motion.p>
-          <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <Link
-              href="/partnership"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-6 text-base font-semibold text-brand-primary shadow-lg shadow-brand-primary/40 transition hover:bg-white/90"
-            >
-              Ortaklık modelleri
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 px-8 py-6 text-base font-semibold text-white transition hover:bg-white/10"
-            >
-              Proje danışmanlığı
-            </Link>
-          </motion.div>
         </div>
       </section>
 
@@ -373,30 +351,6 @@ export default function IoTSolutionClient() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/20 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-4xl px-6 text-center space-y-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">IoT altyapınızı KrizNet ile güçlendirin</h2>
-          <p className="text-base md:text-lg text-gray-200">
-            Akıllı cihazlarımızı sahada deneyimlemek, pilot bölgeler oluşturmak veya entegrasyon planı çıkarmak için ekibimizle iletişime geçin.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-6 text-base font-semibold text-brand-primary shadow-lg shadow-brand-primary/40 transition hover:bg-white/90"
-            >
-              Görüşme planla
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <Link
-              href="/faq"
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 px-8 py-6 text-base font-semibold text-white transition hover:bg-white/10"
-            >
-              Sık sorulanlar
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

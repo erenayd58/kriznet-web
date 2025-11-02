@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 
@@ -25,47 +24,51 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <motion.header 
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled 
-          ? "bg-white/95 backdrop-blur-xl shadow-md border-b border-gray-200" 
-          : "bg-white/80 backdrop-blur-sm border-b border-transparent"
-      }`}
+    <motion.header
+      className="relative sticky top-0 z-50 w-full overflow-hidden transition-all duration-300"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <div
+        className={`pointer-events-none absolute inset-0 -z-10 border-b transition-all duration-300 ${
+          scrolled
+            ? "border-white/60 bg-white/95 backdrop-blur-xl shadow-[0_18px_40px_-25px_rgba(51,51,51,0.45)]"
+            : "border-white/40 bg-gradient-to-r from-white/95 via-[#f8f4f5]/90 to-white/95 backdrop-blur-lg"
+        }`}
+        aria-hidden="true"
+      />
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
+        className="relative mx-auto flex max-w-6xl items-center justify-between px-5 py-4 lg:px-8"
         aria-label="Global"
       >
-        <motion.div 
+        <motion.div
           className="flex lg:flex-1"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
         >
-          <Link href="/" className="-m-1.5 p-1.5">
-            <span className="text-2xl font-bold bg-gradient-to-r from-brand-primary to-red-600 bg-clip-text text-transparent">
+          <Link href="/" className="-m-1.5 flex items-center gap-2 rounded-full p-1.5">
+            <span className="text-2xl font-extrabold tracking-tight text-brand-primary drop-shadow-sm">
               KrizNet
             </span>
           </Link>
         </motion.div>
 
-        {/* Mobile menu button */}
         <div className="flex lg:hidden">
           <motion.button
             whileTap={{ scale: 0.95 }}
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100 transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="-m-2.5 inline-flex items-center justify-center rounded-full p-2.5 text-brand-dark transition-colors hover:bg-brand-primary/10"
+            onClick={() => setMobileMenuOpen((open) => !open)}
           >
             <span className="sr-only">Ana menüyü aç</span>
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               {mobileMenuOpen ? (
                 <motion.div
                   key="close"
@@ -91,26 +94,24 @@ export default function Navbar() {
           </motion.button>
         </div>
 
-        {/* Desktop menu */}
-        <div className="hidden lg:flex lg:gap-x-1">
+        <div className="hidden lg:flex lg:items-center lg:gap-x-2">
           {navigation.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className="relative px-3 py-2 text-sm font-semibold leading-6 text-gray-900 hover:text-brand-primary transition-colors group"
+                className="group relative overflow-hidden rounded-full px-4 py-2 text-sm font-semibold tracking-wide text-brand-dark transition-colors duration-300 hover:text-brand-primary"
               >
-                {item.name}
-                {isActive && (
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-primary"
-                    layoutId="navbar-indicator"
-                    transition={{ duration: 0.3 }}
+                <span className="relative z-10">{item.name}</span>
+                {isActive ? (
+                  <motion.span
+                    layoutId="navbar-pill"
+                    className="absolute inset-0 rounded-full bg-brand-primary/10 ring-1 ring-brand-primary/20"
+                    transition={{ type: "spring", stiffness: 350, damping: 28 }}
                   />
-                )}
-                {!isActive && (
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-primary group-hover:w-full transition-all duration-300" />
+                ) : (
+                  <span className="absolute inset-0 scale-75 opacity-0 rounded-full bg-brand-primary/5 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100" />
                 )}
               </Link>
             );
@@ -118,17 +119,16 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {mobileMenuOpen && (
           <motion.div
-            className="lg:hidden overflow-hidden"
+            className="overflow-hidden lg:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="space-y-1 px-4 pb-3 pt-2 bg-white border-t border-gray-100">
+            <div className="space-y-1 border-t border-white/60 bg-white/95 px-4 pb-4 pt-3 backdrop-blur-lg">
               {navigation.map((item, index) => {
                 const isActive = pathname === item.href;
                 return (
@@ -140,10 +140,10 @@ export default function Navbar() {
                   >
                     <Link
                       href={item.href}
-                      className={`block rounded-lg px-3 py-2.5 text-base font-medium transition-colors ${
+                      className={`block rounded-xl px-3 py-2.5 text-base font-semibold transition-colors ${
                         isActive
                           ? "bg-brand-primary/10 text-brand-primary"
-                          : "text-gray-900 hover:bg-gray-50 hover:text-brand-primary"
+                          : "text-brand-dark hover:bg-brand-primary/10 hover:text-brand-primary"
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -159,4 +159,3 @@ export default function Navbar() {
     </motion.header>
   );
 }
-

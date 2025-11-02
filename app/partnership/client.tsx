@@ -1,6 +1,5 @@
 ﻿"use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -10,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  ArrowRight,
   Award,
   BarChart,
   CheckCircle2,
@@ -113,26 +111,6 @@ export default function PartnershipClient() {
           >
             KrizNet, telekom operatörleri ve kamu kurumlarıyla ortak inovasyon projeleri geliştirerek afet anlarında kritik iletişim altyapısı sağlar.
           </motion.p>
-          <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-6 text-base font-semibold text-brand-primary shadow-lg shadow-brand-primary/40 transition hover:bg-white/90"
-            >
-              Ortaklık görüşmesi planla
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <Link
-              href="/vodafone-partnership"
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 px-8 py-6 text-base font-semibold text-white transition hover:bg-white/10"
-            >
-              Başarılı iş birlikleri
-            </Link>
-          </motion.div>
         </div>
       </section>
 
@@ -238,30 +216,6 @@ export default function PartnershipClient() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/20 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-4xl px-6 text-center space-y-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">KrizNet ile sahada fark yaratmaya hazır mısınız?</h2>
-          <p className="text-base md:text-lg text-gray-200">
-            Ortaklık fırsatlarını değerlendirmek, gelir modellerimizi incelemek veya teknik entegrasyon sürecini konuşmak için bir toplantı planlayalım.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-6 text-base font-semibold text-brand-primary shadow-lg shadow-brand-primary/40 transition hover:bg-white/90"
-            >
-              Ortaklık formu
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <Link
-              href="/team"
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 px-8 py-6 text-base font-semibold text-white transition hover:bg-white/10"
-            >
-              Ekibi tanıyın
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

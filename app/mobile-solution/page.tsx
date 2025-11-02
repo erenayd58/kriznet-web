@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,7 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  ArrowRight,
   Bell,
   CheckCircle2,
   ChevronLeft,
@@ -209,10 +206,9 @@ function ScreenshotsCarousel() {
       <div className="absolute bottom-0 left-[-120px] h-64 w-64 rounded-full bg-rose-500/15 blur-[120px]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-between">
-          <div className="order-2 xl:order-1 w-full max-w-md mx-auto xl:mx-0">
+          <div className="order-2 xl:order-1 w-full max-w-[220px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] mx-auto xl:mx-0">
             <div
-              className="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-slate-900 via-slate-950 to-black shadow-[0_28px_70px_-30px_rgba(15,23,42,0.8)]"
-              style={{ aspectRatio: "9/19.5" }}
+              className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-slate-900 via-slate-950 to-black shadow-[0_28px_70px_-30px_rgba(15,23,42,0.8)]"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
@@ -233,7 +229,7 @@ function ScreenshotsCarousel() {
                       src={screenshot.image}
                       alt={screenshot.title}
                       fill
-                      sizes="(max-width: 768px) 240px, 320px"
+                      sizes="(max-width: 640px) 200px, 260px"
                       className="object-cover"
                       draggable={false}
                     />
@@ -243,14 +239,14 @@ function ScreenshotsCarousel() {
 
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-14 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg transition hover:-translate-x-[3.6rem] hover:bg-white/20"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg transition hover:-translate-x-14 hover:bg-white/20"
                 aria-label="Önceki ekran"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-14 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg transition hover:translate-x-[3.6rem] hover:bg-white/20"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 rounded-full border border-white/20 bg-white/10 p-3 text-white shadow-lg transition hover:translate-x-14 hover:bg-white/20"
                 aria-label="Sonraki ekran"
               >
                 <ChevronRight className="h-5 w-5" />
@@ -345,22 +341,6 @@ export default function MobileSolutionPage() {
           >
             KrizNet mobil uygulaması, sahadaki ekiplerin en kritik anlarda bile bilgiye erişimini, koordinasyonunu ve güvenliğini garanti altına alır.
           </motion.p>
-          <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <Button asChild size="lg" className="bg-brand-primary px-8 py-6 text-base font-semibold text-white hover:bg-brand-primary/90">
-              <Link href="/demo" className="flex items-center gap-2">
-                Uygulamayı deneyin
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/40 px-8 py-6 text-base font-semibold text-white hover:bg-white/10">
-              <Link href="/contact">Uzmanla görüş</Link>
-            </Button>
-          </motion.div>
         </div>
       </section>
 
@@ -480,27 +460,6 @@ export default function MobileSolutionPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/20 via-transparent to-transparent" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent" />
-        <div className="relative mx-auto max-w-4xl px-6 text-center space-y-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Mobil çözümü canlı görmek ister misiniz?</h2>
-          <p className="text-base md:text-lg text-gray-200">
-            Saha senaryolarınıza özel demo hazırlayarak KrizNet mobil uygulamasının tüm yeteneklerini birlikte keşfedelim.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button asChild size="lg" className="bg-white text-brand-primary hover:bg-white/90 px-8 py-6 text-base font-semibold">
-              <Link href="/contact" className="flex items-center gap-2">
-                Demo planla
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/50 px-8 py-6 text-base font-semibold text-white hover:bg-white/10">
-              <Link href="/team">Ekibi tanıyın</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

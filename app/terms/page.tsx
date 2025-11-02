@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Scale, AlertTriangle, CheckCircle2, XCircle, FileText } from "lucide-react";
+import { Scale, AlertTriangle, CheckCircle2, XCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Kullanım Koşulları - KrizNet",
@@ -103,26 +103,6 @@ export default function TermsPage() {
               </ul>
               <p className="mt-4">
                 Uygulama &quot;olduğu gibi&quot; sunulmaktadır ve hiçbir garantisi yoktur.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gray-800/50 border-gray-700">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <FileText className="h-5 w-5 text-brand-primary" />
-                Fikri Mülkiyet
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-gray-300 space-y-4">
-              <p>
-                KrizNet uygulaması ve tüm içeriği telif hakkı ile korunmaktadır. 
-                Uygulamanın içeriği, tasarımı ve kodları izinsiz kopyalanamaz, 
-                dağıtılamaz veya değiştirilemez.
-              </p>
-              <p>
-                Bu uygulama açık kaynak lisansı altında dağıtılmaktadır. Lisans detayları 
-                için GitHub deposuna bakabilirsiniz.
               </p>
             </CardContent>
           </Card>

@@ -362,39 +362,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/20 via-transparent to-transparent" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent" />
-        <div className="relative mx-auto max-w-4xl px-6 text-center space-y-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Saha operasyonlarını bir üst seviyeye taşımaya hazır mısınız?
-          </h2>
-          <p className="text-base md:text-lg text-gray-200">
-            KrizNet ekibi, afet yönetimi ve kritik iletişim projelerinde uçtan uca çözüm ortağınız olmak için hazır.
-            Demo talep edin, çözümlerimizi birlikte tasarlayalım.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              asChild
-              size="lg"
-              className="bg-white text-brand-primary hover:bg-white/90 px-8 py-6 text-base font-semibold"
-            >
-              <Link href="/contact" className="flex items-center gap-2">
-                Demo talep et
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-white/50 px-8 py-6 text-base font-semibold text-white hover:bg-white/10"
-            >
-              <Link href="/demo">Canlı ön izleme</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
