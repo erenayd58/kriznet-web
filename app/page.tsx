@@ -152,7 +152,7 @@ export default function Home() {
       <section className="relative overflow-hidden py-32">
         <div className="absolute left-6 top-6 z-10 text-left">
           <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-900/90 drop-shadow-sm whitespace-nowrap">
-            Vodafone Bi' Düşünsene Fikir Yarışmasına ait projedir.
+            Vodafone Bi&apos; Düşünsene Fikir Yarışmasına ait projedir.
           </p>
         </div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]" />
