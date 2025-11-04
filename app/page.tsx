@@ -150,6 +150,11 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <section className="relative overflow-hidden py-32">
+        <div className="absolute left-6 top-6 z-10 text-left">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-900/90 drop-shadow-sm whitespace-nowrap">
+            Vodafone Bi' Düşünsene Fikir Yarışmasına ait projedir.
+          </p>
+        </div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]" />
         <div className="absolute -top-44 -left-24 h-80 w-80 rounded-full bg-brand-primary/30 blur-[120px]" />
         <div className="absolute bottom-0 right-0 h-[420px] w-[420px] rounded-full bg-rose-500/20 blur-[160px]" />
